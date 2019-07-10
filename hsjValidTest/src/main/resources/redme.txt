@@ -1,0 +1,22 @@
+java服务接口参数校验的一种方式
+
+文章主要讲解在Springboot里面使用hibernate-validator，默认Springboot已经帮我们集成了hibernate-validator。
+
+其他方式加入依赖：
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>5.4.1.Final</version>
+</dependency>
+
+方式1，在@RequestBody注解值对象处使用，在值对象ValBean里面加上校验字段的注解：
+             在controller中使用，这里校验不通过会抛出MethodArgumentNotValidException异常，我们使用spring的统一异常处理拦截（@RestControllerAdvice+@ExceptionHandler）。
+             
+方式2，在@PathVariable和@RequestParam类型处使用：
+             在controller中使用，这里校验不通过会抛出ConstraintViolationException异常，我们同样使用spring的统一异常处理拦截（@RestControllerAdvice+@ExceptionHandler）。
+             
+统一异常拦截处理：
+
+配置， @PathVariable和@RequestParam方式注意需要在 controller类上加上@Validated注解，同时配置MethodValidationPostProcessor类Bean
+
+源码：https://github.com/hsj-xiaokang/springboot-validator                      
