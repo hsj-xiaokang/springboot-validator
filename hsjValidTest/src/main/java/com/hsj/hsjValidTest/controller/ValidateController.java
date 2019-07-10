@@ -1,7 +1,5 @@
 package com.hsj.hsjValidTest.controller;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -9,7 +7,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.hsj.hsjValidTest.pojo.ValBean;
+import com.hsj.hsjValidTest.utils.BindingResultUtils;
 import com.hsj.hsjValidTest.vo.JSONResultWrapper;
 /**
  * 博客：https://www.cnblogs.com/leechenxiang/p/5546615.html
@@ -54,7 +52,7 @@ public class ValidateController {
     	
         if(result.hasErrors()){    
             //如果没有通过,跳转提示    
-            Map<String, String> map = getErrors(result);
+            Map<String, String> map = BindingResultUtils.getErrors(result);
             return JSONResultWrapper.errorWithMap(map,JSONResultWrapper.RESCODE_ERR);
         }else{    
             //继续业务逻辑    
@@ -62,19 +60,6 @@ public class ValidateController {
         } 
         
         return JSONResultWrapper.okWithObject(b,JSONResultWrapper.RESCODE_OK);
-    }
-    
-    
-    private Map<String, String> getErrors(BindingResult result) {
-        Map<String, String> map = new HashMap<String, String>();
-        List<FieldError> list = result.getFieldErrors();
-        for (FieldError error : list) {
-        	LOGGER.info("error.getField(): {}",error.getField());
-        	LOGGER.info("error.getDefaultMessage(): {}",error.getDefaultMessage());
-            
-            map.put(error.getField(), error.getDefaultMessage());
-        }
-        return map;
     }
     
 }
