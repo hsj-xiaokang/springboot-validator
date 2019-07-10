@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.hsj.hsjValidTest.pojo.ValBean;
-import com.hsj.hsjValidTest.vo.LeeJSONResult;
+import com.hsj.hsjValidTest.vo.JSONResultWrapper;
 /**
  * 博客：https://www.cnblogs.com/leechenxiang/p/5546615.html
  * @Description:TODO
@@ -50,18 +50,18 @@ public class ValidateController {
 	 * @throws Exception
 	 */
     @RequestMapping(value = "/val",method={RequestMethod.POST,RequestMethod.GET} )
-    public LeeJSONResult val(@Valid @RequestBody ValBean b, BindingResult result) {
+    public JSONResultWrapper val(@Valid @RequestBody ValBean b, BindingResult result) {
     	
         if(result.hasErrors()){    
             //如果没有通过,跳转提示    
             Map<String, String> map = getErrors(result);
-            return LeeJSONResult.errorWithMap(map,LeeJSONResult.RESCODE_ERR);
+            return JSONResultWrapper.errorWithMap(map,JSONResultWrapper.RESCODE_ERR);
         }else{    
             //继续业务逻辑    
         	LOGGER.info("info {}",JSON.toJSONString(b));
         } 
         
-        return LeeJSONResult.okWithObject(b,LeeJSONResult.RESCODE_OK);
+        return JSONResultWrapper.okWithObject(b,JSONResultWrapper.RESCODE_OK);
     }
     
     

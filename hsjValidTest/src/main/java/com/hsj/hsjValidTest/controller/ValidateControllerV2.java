@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.hsj.hsjValidTest.pojo.ValBean;
-import com.hsj.hsjValidTest.vo.LeeJSONResult;
+import com.hsj.hsjValidTest.vo.JSONResultWrapper;
 /**
  * 博客：https://www.cnblogs.com/leechenxiang/p/5546615.html
  * @Description:TODO
@@ -44,10 +44,10 @@ public class ValidateControllerV2 {
 	 * @throws Exception
 	 */
     @RequestMapping(value = "/valV2",method={RequestMethod.POST,RequestMethod.GET} )
-    public LeeJSONResult valV2(@Valid @RequestBody ValBean b) {
+    public JSONResultWrapper valV2(@Valid @RequestBody ValBean b) {
         //继续业务逻辑    
         LOGGER.info("info {}",JSON.toJSONString(b));
-        return LeeJSONResult.okWithObject(b,LeeJSONResult.RESCODE_OK);
+        return JSONResultWrapper.okWithObject(b,JSONResultWrapper.RESCODE_OK);
     }
     
     

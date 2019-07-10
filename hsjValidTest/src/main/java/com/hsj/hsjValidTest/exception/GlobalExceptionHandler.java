@@ -13,7 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.hsj.hsjValidTest.vo.LeeJSONResult;
+import com.hsj.hsjValidTest.vo.JSONResultWrapper;
 /**
  * 
 * @ClassName: GlobalExceptionHandler  
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
 	* @throws
 	 */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public LeeJSONResult validationErrorHandler(MethodArgumentNotValidException ex) {
+    public JSONResultWrapper validationErrorHandler(MethodArgumentNotValidException ex) {
         // 同样是获取BindingResult对象，然后获取其中的错误信息
         // 如果前面开启了fail_fast，事实上这里只会有一个信息
     	LOGGER.info("校验异常=MethodArgumentNotValidException.class");
@@ -44,9 +44,9 @@ public class GlobalExceptionHandler {
                 .stream()
                 .map(ObjectError::getDefaultMessage)
                 .collect(Collectors.toList());
-        return  LeeJSONResult.errorWithMessageAndObject(LeeJSONResult.MESSAGE_ERROR,
+        return  JSONResultWrapper.errorWithMessageAndObject(JSONResultWrapper.MESSAGE_ERROR,
         												errorInformation,
-        												LeeJSONResult.RESCODE_ERR);
+        												JSONResultWrapper.RESCODE_ERR);
     }
     /**
 	 * 
@@ -58,14 +58,14 @@ public class GlobalExceptionHandler {
 	* @throws
 	 */
     @ExceptionHandler(ConstraintViolationException.class)
-    public LeeJSONResult validationErrorHandlerOther(ConstraintViolationException ex) {
+    public JSONResultWrapper validationErrorHandlerOther(ConstraintViolationException ex) {
         List<String> errorInformation = ex.getConstraintViolations()
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.toList());
-        return  LeeJSONResult.errorWithMessageAndObject(LeeJSONResult.MESSAGE_ERROR,
+        return  JSONResultWrapper.errorWithMessageAndObject(JSONResultWrapper.MESSAGE_ERROR,
 				errorInformation,
-				LeeJSONResult.RESCODE_ERR);
+				JSONResultWrapper.RESCODE_ERR);
     }
 
     /**
@@ -78,10 +78,10 @@ public class GlobalExceptionHandler {
     * @throws
      */
     @ExceptionHandler
-    public LeeJSONResult validationErrorHandlerDefault(Exception e) {
-        return  LeeJSONResult.errorWithMessageAndObject(LeeJSONResult.MESSAGE_ERROR,
+    public JSONResultWrapper validationErrorHandlerDefault(Exception e) {
+        return  JSONResultWrapper.errorWithMessageAndObject(JSONResultWrapper.MESSAGE_ERROR,
         												e.getMessage(),
-        												LeeJSONResult.RESCODE_ERR);
+        												JSONResultWrapper.RESCODE_ERR);
     }
 }
 
