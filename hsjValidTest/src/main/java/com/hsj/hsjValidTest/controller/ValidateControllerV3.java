@@ -27,29 +27,23 @@ public class ValidateControllerV3 {
 	
 	private final static Logger LOGGER = LoggerFactory.getLogger(ValidateControllerV3.class);
 
-	 @RequestMapping(value = "/valV3_PathVariable/{name}",method={RequestMethod.POST,RequestMethod.GET} )
-    public JSONResultWrapper valV3_PathVariable(
-    				@NotBlank(message="username不能为空")
-    				@Length(max=6, min=3, message="username最小3位，最大6位")
-                    @PathVariable String name) {
-	        LOGGER.info("valV3_PathVariable info {}",name);
-	        return JSONResultWrapper.okWithObject(name,JSONResultWrapper.RESCODE_OK);
-    }
+	@RequestMapping(value = "/valV3_PathVariable/{name}", method = { RequestMethod.POST, RequestMethod.GET })
+	public JSONResultWrapper valV3_PathVariable(
+			@NotBlank(message = "username不能为空") @Length(max = 6, min = 3, message = "username最小3位，最大6位") @PathVariable String name) {
+		LOGGER.info("valV3_PathVariable info {}", name);
+		return JSONResultWrapper.okWithObject(name, JSONResultWrapper.RESCODE_OK);
+	}
 
-	 @RequestMapping(value = "/valV3_RequestParam",method={RequestMethod.POST,RequestMethod.GET} )
-    public JSONResultWrapper valV3_RequestParam(
-    	    		@NotBlank(message="username不能为空")
-    	    		@Length(max=6, min=3, message="username最小3位，最大6位") 
-                    @RequestParam("name") String name) {
-	        LOGGER.info("valV3_RequestParam info {}",name);
-	        return JSONResultWrapper.okWithObject(name,JSONResultWrapper.RESCODE_OK);
-    }
-	 
-	   @RequestMapping(value = "/valV3_RequestParam_age",method={RequestMethod.POST,RequestMethod.GET} )
-	    public JSONResultWrapper valV3_RequestParam_age(
-	    				@Max(value=20, message="最大年龄20")   
-	                    @RequestParam("age") int age) {
-		        LOGGER.info("valV3_RequestParam_age info {}",age);
-		        return JSONResultWrapper.okWithObject(age,JSONResultWrapper.RESCODE_OK);
-	    }
+	@RequestMapping(value = "/valV3_RequestParam", method = { RequestMethod.POST, RequestMethod.GET })
+	public JSONResultWrapper valV3_RequestParam(
+			@NotBlank(message = "username不能为空") @Length(max = 6, min = 3, message = "username最小3位，最大6位") @RequestParam("name") String name) {
+		LOGGER.info("valV3_RequestParam info {}", name);
+		return JSONResultWrapper.okWithObject(name, JSONResultWrapper.RESCODE_OK);
+	}
+
+	@RequestMapping(value = "/valV3_RequestParam_age", method = { RequestMethod.POST, RequestMethod.GET })
+	public JSONResultWrapper valV3_RequestParam_age(@Max(value = 20, message = "最大年龄20") @RequestParam("age") int age) {
+		LOGGER.info("valV3_RequestParam_age info {}", age);
+		return JSONResultWrapper.okWithObject(age, JSONResultWrapper.RESCODE_OK);
+	}
 }
