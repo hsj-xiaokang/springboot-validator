@@ -1,3 +1,8 @@
+自定义参数校验：
+           com.hsj.hsjValidTest.selfDefinedValidatorAnnotation
+
+
+
 java服务接口参数校验的一种方式
 
 文章主要讲解在Springboot里面使用hibernate-validator，默认Springboot已经帮我们集成了hibernate-validator。
