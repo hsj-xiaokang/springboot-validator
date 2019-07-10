@@ -28,7 +28,7 @@ public class AgeConstraintValidator implements ConstraintValidator<Age, Integer>
 	
     @Override
     public boolean isValid(Integer realValue, ConstraintValidatorContext context) {
-    	LOGGER.info("---**********SexConstraintValidator-isValid的sex参数值{}**********---",realValue);
+    	LOGGER.info("---**********SexConstraintValidator-isValid的realValue参数值{}**********---",realValue);
         return realValue == null ? false : (
         		                       (realValue >= realMin && realValue<= realMax) ? true : false
         		                     );
