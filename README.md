@@ -1,5 +1,5 @@
 # springboot-validator
-ssm中使用hibernate-validator验证参数,基于Springboot
+使用hibernate-validator验证参数,基于Springboot
 
 java服务接口参数校验，教你一个更优雅的处理方式。
 
