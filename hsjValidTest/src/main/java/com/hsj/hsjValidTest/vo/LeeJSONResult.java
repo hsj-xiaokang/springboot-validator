@@ -10,8 +10,8 @@ import java.util.Map;
  * @time:2017年11月14日 上午10:28:35
  */
 public class LeeJSONResult {
-	private final static String MESSAGE_OK = "成功！";
-	private final static String MESSAGE_ERROR = "失败！";
+	public final static String MESSAGE_OK = "成功！";
+	public final static String MESSAGE_ERROR = "失败！";
 	public final static int RESCODE_ERR = 0;
 	public final static int RESCODE_OK = 1;
 	

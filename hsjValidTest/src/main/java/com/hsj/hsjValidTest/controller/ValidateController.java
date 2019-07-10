@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
+import com.hsj.hsjValidTest.pojo.ValBean;
 import com.hsj.hsjValidTest.vo.LeeJSONResult;
-import com.hsj.hsjValidTest.vo.ValBean;
 /**
  * 博客：https://www.cnblogs.com/leechenxiang/p/5546615.html
  * @Description:TODO
@@ -30,7 +30,7 @@ public class ValidateController {
 	
 	private final static Logger LOGGER = LoggerFactory.getLogger(ValidateController.class);
 
-	/**
+	/**不优雅的处理方式，不推荐；推荐全局异常处理
 	 * post:http://10.88.20.84:8081/hsjValidatorTest/val/val
 	 * Content-Type:application/json;charset=UTF-8
 	 * body:{
@@ -50,7 +50,7 @@ public class ValidateController {
 	 * @throws Exception
 	 */
     @RequestMapping(value = "/val",method={RequestMethod.POST,RequestMethod.GET} )
-    public LeeJSONResult val(@Valid @RequestBody ValBean b, BindingResult result) throws Exception {
+    public LeeJSONResult val(@Valid @RequestBody ValBean b, BindingResult result) {
     	
         if(result.hasErrors()){    
             //如果没有通过,跳转提示    
@@ -61,21 +61,9 @@ public class ValidateController {
         	LOGGER.info("info {}",JSON.toJSONString(b));
         } 
         
-        return LeeJSONResult.ok();
+        return LeeJSONResult.okWithObject(b,LeeJSONResult.RESCODE_OK);
     }
     
-    /**
-     * 测试
-     * @Description:TODO
-     * @author:hsj qq:2356899074
-     * @time:2017年11月14日 下午1:35:05
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/val_test", method=RequestMethod.GET)
-    public LeeJSONResult val_test() throws Exception {            
-        return LeeJSONResult.ok();
-    }
     
     private Map<String, String> getErrors(BindingResult result) {
         Map<String, String> map = new HashMap<String, String>();

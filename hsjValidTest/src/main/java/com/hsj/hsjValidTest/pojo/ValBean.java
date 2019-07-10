@@ -1,4 +1,4 @@
-package com.hsj.hsjValidTest.vo;
+package com.hsj.hsjValidTest.pojo;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Pattern;
@@ -40,21 +40,21 @@ public class ValBean {
      */
     private Long id;
 
-    @Max(value=20, message="{val.age.message}")   
+    @Max(value=20, message="最大年龄20")   
     private Integer age;
     
-    @NotBlank(message="{username.not.null}")
-    @Length(max=6, min=3, message="{username.length}")
+    @NotBlank(message="username不能为空")
+    @Length(max=6, min=3, message="username最小3位，最大6位")
     private String username;
 
-    @NotBlank(message="{pwd.not.null}")
+    @NotBlank(message="密码不能为空")
     @Pattern(regexp="^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$", message="密码必须是8~10位数字和字母的组合")
     private String password;
     
     @Pattern(regexp="^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$", message="手机号格式不正确")
     private String phone;
 
-    @Email(message="{email.format.error}")
+    @Email(message="邮箱格式不正确")
     @Pattern(regexp="^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$", message="邮箱格式不正确")
     private String email;
 
